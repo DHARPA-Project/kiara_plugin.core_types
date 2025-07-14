@@ -15,12 +15,12 @@ from kiara.utils.class_loading import (
 )
 
 __author__ = """Markus Binsteiner"""
-__email__ = "markus@frkl.io"
+__email__ = "markus@frkl.dev"
 
 
 KIARA_METADATA = {
     "authors": [{"name": __author__, "email": __email__}],
-    "description": "Kiara modules for: core-types",
+    "description": "Kiara modules for: core_types",
     "references": {
         "source_repo": {
             "desc": "The module package git repository.",
