@@ -12,7 +12,6 @@ class IncludedInListCheckModule(KiaraModule):
     def create_inputs_schema(
         self,
     ) -> ValueMapSchema:
-
         inputs = {
             "list": {"type": "list", "doc": "The list."},
             "item": {
@@ -25,7 +24,6 @@ class IncludedInListCheckModule(KiaraModule):
     def create_outputs_schema(
         self,
     ) -> ValueMapSchema:
-
         outputs = {
             "is_included": {
                 "type": "boolean",
@@ -35,7 +33,6 @@ class IncludedInListCheckModule(KiaraModule):
         return outputs
 
     def process(self, inputs: ValueMap, outputs: ValueMap) -> None:
-
         item_list = inputs.get_value_data("list")
         item = inputs.get_value_data("item")
 

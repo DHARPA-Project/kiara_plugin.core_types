@@ -19,7 +19,6 @@ from kiara.utils.yaml import StringYAML
 
 
 class LineageDataInputs(RenderInputsSchema):
-
     render_style: str = Field(
         description="The style to use for rendering the lineage graph.",
         default="json",
@@ -32,7 +31,6 @@ class LineageDataInputs(RenderInputsSchema):
     @model_validator(mode="before")
     @classmethod
     def validate_linage_inputs(cls, values):
-
         result = {}
         result["render_style"] = values.pop("render_style", "json")
         config = values.pop("config", {})
@@ -49,12 +47,10 @@ class LineageDataRendererConfig(KiaraRendererConfig):
 
 class LineageTransformer(SourceTransformer):
     def __init__(self, kiara: Kiara):
-
         self._kiara: Kiara = kiara
         super().__init__()
 
     def retrieve_supported_python_classes(self) -> Iterable[Type]:
-
         return [Value, ValueLineage, str, uuid.UUID]
 
     def retrieve_supported_inputs_descs(self) -> Union[str, Iterable[str]]:
@@ -75,13 +71,11 @@ class LineageTransformer(SourceTransformer):
 class LineageRendererData(
     KiaraRenderer[ValueLineage, LineageDataInputs, str, LineageDataRendererConfig]
 ):
-
     _renderer_name = "lineage_data"
     _renderer_config_cls = LineageDataRendererConfig  # type: ignore
     _inputs_schema = LineageDataInputs  # type: ignore
 
     def retrieve_doc(self) -> Union[str, None]:
-
         return "Render a value lineage as data."
 
     def retrieve_source_transformers(self) -> Iterable[SourceTransformer]:
@@ -94,7 +88,6 @@ class LineageRendererData(
         return "lineage_data"
 
     def _render(self, instance: ValueLineage, render_config: LineageDataInputs) -> str:
-
         render_style = render_config.render_style
         func_name = f"render__{render_style}"
         if not hasattr(self, func_name):

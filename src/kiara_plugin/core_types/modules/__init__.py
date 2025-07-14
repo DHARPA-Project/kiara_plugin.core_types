@@ -25,7 +25,6 @@ class KiaraInputsConfig(KiaraModuleConfig):
     def augment_inputs_schema(
         self, inputs_schema: Mapping[str, Union[Mapping[str, Any], ValueSchema]]
     ) -> Mapping[str, Union[Mapping[str, Any], ValueSchema]]:
-
         if not self.add_inputs:
             return inputs_schema
 
@@ -33,7 +32,6 @@ class KiaraInputsConfig(KiaraModuleConfig):
         # TODO: pydantic refactor
 
         for field_name, field in self.__class__.model_fields.items():
-
             if self.input_fields and field_name not in self.input_fields:
                 continue
 
@@ -142,7 +140,9 @@ class AutoInputsKiaraModule(KiaraModule):
             )
 
         except Exception as e:
-            raise Exception(f"Can't create input schemas for instance '{self.alias}': {e}")  # type: ignore
+            raise Exception(
+                f"Can't create input schemas for instance '{self.alias}': {e}"
+            )  # type: ignore
 
     def get_data_for_field(self, field_name: str, inputs: ValueMap) -> Any:
         """Convenience method to quickly access data for a config or input field, depending on the module configuration."""

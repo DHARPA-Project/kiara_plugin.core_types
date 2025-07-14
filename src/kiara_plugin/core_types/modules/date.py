@@ -19,19 +19,16 @@ class ExtractDateModule(KiaraModule):
     def create_inputs_schema(
         self,
     ) -> ValueMapSchema:
-
         return {"text": {"type": "string", "doc": "The input string."}}
 
     def create_outputs_schema(
         self,
     ) -> ValueMapSchema:
-
         return {
             "date": {"type": "date", "doc": "The date extracted from the input string."}
         }
 
     def process(self, inputs: ValueMap, outputs: ValueMap) -> None:
-
         from dateutil import parser
 
         text = inputs.get_value_data("text")
@@ -56,7 +53,6 @@ class DateRangeCheckModule(KiaraModule):
     def create_inputs_schema(
         self,
     ) -> ValueMapSchema:
-
         inputs: Dict[str, Dict[str, Any]] = {
             "date": {"type": "date", "doc": "The date to check."},
             "earliest": {
@@ -76,7 +72,6 @@ class DateRangeCheckModule(KiaraModule):
     def create_outputs_schema(
         self,
     ) -> ValueMapSchema:
-
         outputs = {
             "within_range": {
                 "type": "boolean",
@@ -86,7 +81,6 @@ class DateRangeCheckModule(KiaraModule):
         return outputs
 
     def process(self, inputs: ValueMap, outputs: ValueMap) -> None:
-
         d: datetime.datetime = inputs.get_value_data("date")
         earliest: Union[datetime.datetime, None] = inputs.get_value_data("earliest")
         latest: Union[datetime.datetime, None] = inputs.get_value_data("latest")

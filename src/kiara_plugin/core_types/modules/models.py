@@ -11,7 +11,6 @@ from kiara_plugin.core_types.data_types.models import KiaraModelList
 
 
 class LoadKiaraModel(DeserializeValueModule):
-
     _module_type_name = "load.kiara_model"
 
     @classmethod
@@ -27,7 +26,6 @@ class LoadKiaraModel(DeserializeValueModule):
         return "kiara_model"
 
     def to__python_object(self, data: SerializedData, **config: Any) -> KiaraModel:
-
         chunks = data.get_serialized_data("data")
         assert chunks.get_number_of_chunks() == 1
         _chunks = list(chunks.get_chunks(as_files=False))
@@ -45,7 +43,6 @@ class LoadKiaraModel(DeserializeValueModule):
 
 
 class LoadKiaraModelList(DeserializeValueModule):
-
     _module_type_name = "load.kiara_model_list"
 
     @classmethod
@@ -61,7 +58,6 @@ class LoadKiaraModelList(DeserializeValueModule):
         return "kiara_model_list"
 
     def to__python_object(self, data: SerializedData, **config: Any) -> KiaraModelList:
-
         model_id: str = data.data_type_config["kiara_model_id"]
         model_registry = ModelRegistry.instance()
         m_cls = model_registry.get_model_cls(kiara_model_id=model_id)

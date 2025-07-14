@@ -73,7 +73,6 @@ class KiaraList(BaseModel, Sequence):
         return self._value_hash
 
     def __getitem__(self, item):
-
         return self.list_data.__getitem__(item)
 
     def __iter__(self):
@@ -94,7 +93,6 @@ class KiaraModelSchemaMetadata(ValueMetadata):
 
     @classmethod
     def create_value_metadata(cls, value: "Value") -> "KiaraModelSchemaMetadata":
-
         kiara_model_id = value.data_type_config.get("kiara_model_id", None)
         if not kiara_model_id:
             raise KiaraException(
@@ -125,7 +123,6 @@ class KiaraModelListMetadata(ValueMetadata):
 
     @classmethod
     def create_value_metadata(cls, value: "Value") -> "KiaraModelListMetadata":
-
         model_list: "KiaraModelList" = value.data
         length = len(model_list.list_items)
 

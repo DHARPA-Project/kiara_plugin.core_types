@@ -83,7 +83,6 @@ class AndModule(LogicProcessingModule):
         }
 
     def process(self, inputs: ValueMap, outputs: ValueMap) -> None:
-
         time.sleep(self.config.delay)  # type: ignore
 
         outputs.set_value(
@@ -99,7 +98,6 @@ class OrModule(LogicProcessingModule):
     def create_inputs_schema(
         self,
     ) -> ValueMapSchema:
-
         return {
             "a": {"type": "boolean", "doc": "A boolean describing this input state."},
             "b": {"type": "boolean", "doc": "A boolean describing this input state."},
@@ -108,7 +106,6 @@ class OrModule(LogicProcessingModule):
     def create_outputs_schema(
         self,
     ) -> ValueMapSchema:
-
         return {
             "y": {
                 "type": "boolean",
@@ -117,6 +114,5 @@ class OrModule(LogicProcessingModule):
         }
 
     def process(self, inputs: ValueMap, outputs: ValueMap) -> None:
-
         time.sleep(self.config.get("delay"))  # type: ignore
         outputs.set_value("y", inputs.get_value_data("a") or inputs.get_value_data("b"))

@@ -12,16 +12,13 @@ from kiara.modules.included_core_modules.filter import FilterModule
 
 
 class StringFiltersModule(FilterModule):
-
     _module_type_name = "string.filters"
 
     @classmethod
     def retrieve_supported_type(cls) -> Union[Dict[str, Any], str]:
-
         return "string"
 
     def create_filter_inputs(self, filter_name: str) -> Union[None, ValueMapSchema]:
-
         if filter_name == "tokens":
             return {
                 "filter_tokens": {
@@ -39,7 +36,6 @@ class StringFiltersModule(FilterModule):
         return None
 
     def filter__tokens(self, value: Value, filter_inputs: Mapping[str, Any]):
-
         tokens = filter_inputs.get("filter_tokens", None)
         if not tokens:
             return None
@@ -54,7 +50,6 @@ class StringFiltersModule(FilterModule):
 
 
 class RegexModuleConfig(KiaraModuleConfig):
-
     regex: str = Field(description="The regex to apply.")
     only_first_match: bool = Field(
         description="Whether to only return the first match, or all matches.",
@@ -76,7 +71,6 @@ class RegexModule(KiaraModule):
     def create_outputs_schema(
         self,
     ) -> ValueMapSchema:
-
         if self.get_config_value("only_first_match"):
             output_schema = {"text": {"type": "string", "doc": "The first match."}}
         else:
@@ -85,7 +79,6 @@ class RegexModule(KiaraModule):
         return output_schema
 
     def process(self, inputs: ValueMap, outputs: ValueMap) -> None:
-
         text = inputs.get_value_data("text")
         regex = self.get_config_value("regex")
         matches = re.findall(regex, text)
@@ -102,7 +95,6 @@ class RegexModule(KiaraModule):
 
 
 class ReplaceModuleConfig(KiaraModuleConfig):
-
     replacement_map: Dict[str, str] = Field(
         description="A map, containing the strings to be replaced as keys, and the replacements as values."
     )
@@ -121,7 +113,6 @@ class ReplaceStringModule(KiaraModule):
     def create_inputs_schema(
         self,
     ) -> ValueMapSchema:
-
         return {"text": {"type": "string", "doc": "The input string."}}
 
     def create_outputs_schema(
@@ -130,7 +121,6 @@ class ReplaceStringModule(KiaraModule):
         return {"text": {"type": "string", "doc": "The replaced string."}}
 
     def process(self, inputs: ValueMap, outputs: ValueMap) -> None:
-
         text = inputs.get_value_data("text")
         repl_map = self.get_config_value("replacement_map")
         default = self.get_config_value("default_value")

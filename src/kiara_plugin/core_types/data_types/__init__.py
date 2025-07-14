@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""This module contains the value type classes that are used in the ``kiara_plugin.core_types`` package.
-"""
+"""This module contains the value type classes that are used in the ``kiara_plugin.core_types`` package."""
 
 import datetime
 from typing import Any, ClassVar, Iterable, Mapping, Type, Union
@@ -52,7 +51,6 @@ class FloatType(AnyType[float, DataTypeConfig]):
         return SCALAR_CHARACTERISTICS
 
     def _validate(cls, value: Any) -> Any:
-
         if not isinstance(value, float):
             raise ValueError(f"Invalid type '{type(value)}' for float: {value}")
 
@@ -78,7 +76,6 @@ class DateType(AnyType[datetime.datetime, DataTypeConfig]):
         return SCALAR_CHARACTERISTICS
 
     def parse_python_obj(self, data: Any) -> datetime.datetime:
-
         from dateutil import parser
 
         if isinstance(data, str):
@@ -112,7 +109,6 @@ class ListValueType(AnyType[KiaraList, DataTypeConfig]):
         return DataTypeCharacteristics(is_scalar=False, is_json_serializable=True)
 
     def parse_python_obj(self, data: Any) -> KiaraList:
-
         python_cls = data.__class__
         _data = None
         _schema = None
@@ -148,7 +144,6 @@ class ListValueType(AnyType[KiaraList, DataTypeConfig]):
         return result_model
 
     def _validate(self, data: KiaraList) -> None:
-
         if not isinstance(data, KiaraList):
             raise Exception(f"Invalid type: {type(data)}.")
 
@@ -158,6 +153,5 @@ class ListValueType(AnyType[KiaraList, DataTypeConfig]):
     #     return orjson_dumps(data.list_data, option=orjson.OPT_INDENT_2)
 
     def serialize(self, data: KiaraList) -> SerializedData:
-
         result = self.serialize_as_json(data.model_dump())
         return result

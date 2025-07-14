@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""This module contains the value type classes that are used in the ``kiara_plugin.core_types`` package.
-"""
+"""This module contains the value type classes that are used in the ``kiara_plugin.core_types`` package."""
+
 from functools import lru_cache
 from typing import Any, ClassVar, Generic, List, Mapping, Type, TypeVar, Union
 
@@ -22,7 +22,6 @@ logger = structlog.getLogger()
 
 
 class KiaraModelTypeConfig(DataTypeConfig):
-
     kiara_model_id: str = Field(
         description="The ID of a registered kiara model.",
         default="you.must.specify.your.own.here",
@@ -41,7 +40,6 @@ class KiaraModelType(AnyType[KiaraModel, KiaraModelTypeConfig]):
         return KiaraModelTypeConfig  # type: ignore
 
     def serialize(self, data: KiaraModel) -> Union[str, SerializedData]:
-
         if self.type_config.kiara_model_id is None:
             logger.debug(
                 "ignore.serialize_request",
@@ -90,7 +88,6 @@ class KiaraModelType(AnyType[KiaraModel, KiaraModelTypeConfig]):
 
     @lru_cache(maxsize=1)
     def get_model_cls(self) -> Type[KiaraModel]:
-
         model_type_id = self.type_config.kiara_model_id
         assert model_type_id is not None
 
@@ -103,7 +100,6 @@ class KiaraModelType(AnyType[KiaraModel, KiaraModelTypeConfig]):
         return model_cls
 
     def parse_python_obj(self, data: Any) -> KiaraModel:
-
         if isinstance(data, KiaraModel):
             return data
         elif isinstance(data, Mapping):
@@ -119,7 +115,6 @@ class KiaraModelType(AnyType[KiaraModel, KiaraModelTypeConfig]):
                 )
 
     def _validate(self, value: KiaraModel) -> None:
-
         if not isinstance(value, KiaraModel):
             raise Exception(f"Invalid type: {type(value)}.")
 
@@ -139,7 +134,6 @@ KIARA_MODEL = TypeVar("KIARA_MODEL", bound=KiaraModel)
 
 
 class KiaraModelList(BaseModel, Generic[KIARA_MODEL]):
-
     model_config = ConfigDict(extra="forbid")
 
     kiara_model_id: str = Field(description="The ID of a registered kiara model.")
@@ -159,7 +153,6 @@ class KiaraModelListType(AnyType[KiaraModelList, KiaraModelTypeConfig]):
         return KiaraModelTypeConfig  # type: ignore
 
     def serialize(self, data: KiaraModelList) -> Union[str, SerializedData]:
-
         if self.type_config.kiara_model_id is None:
             logger.debug(
                 "ignore.serialize_request",
@@ -215,7 +208,6 @@ class KiaraModelListType(AnyType[KiaraModelList, KiaraModelTypeConfig]):
 
     @lru_cache(maxsize=1)
     def get_model_cls(self) -> Type[KiaraModel]:
-
         model_type_id = self.type_config.kiara_model_id
         assert model_type_id is not None
 
@@ -228,7 +220,6 @@ class KiaraModelListType(AnyType[KiaraModelList, KiaraModelTypeConfig]):
         return model_cls
 
     def parse_python_obj(self, data: Any) -> KiaraModelList[KiaraModel]:
-
         if isinstance(data, KiaraModelList):
             return data
         elif not isinstance(data, list):
@@ -258,7 +249,6 @@ class KiaraModelListType(AnyType[KiaraModelList, KiaraModelTypeConfig]):
         return instance
 
     def _validate(self, value: Any) -> None:
-
         if not isinstance(value, KiaraModelList):
             raise Exception(f"Invalid type: {type(value)}.")
 
