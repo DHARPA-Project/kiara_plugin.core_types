@@ -32,7 +32,7 @@ class KiaraInputsConfig(KiaraModuleConfig):
         result: Dict[str, Any] = dict(inputs_schema)
         # TODO: pydantic refactor
 
-        for field_name, field in self.model_fields.items():
+        for field_name, field in self.__class__.model_fields.items():
 
             if self.input_fields and field_name not in self.input_fields:
                 continue
