@@ -1,4 +1,4 @@
-site_name: kiara_plugin.core_types
+site_name: "kiara plugin: core_types"
 repo_url: https://github.com/DHARPA-Project/kiara_plugin.core_types
 site_author: Markus Binsteiner
 docs_dir: docs
@@ -29,6 +29,8 @@ extra:
   version:
     provider: mike
 
+watch:
+  - src/
 plugins:
 - search
 - autorefs
@@ -51,9 +53,6 @@ plugins:
             - "^_config_cls"
         import:
         - https://dharpa.org/kiara/latest/objects.inv
-
-    watch:
-      - "src"
     enable_inventory: true
 
 - macros:
@@ -63,8 +62,8 @@ plugins:
 
 - gen-files:
     scripts:
-      - scripts/documentation/gen_info_pages.py
-      - scripts/documentation/gen_api_doc_pages.py
+      - docs/.scripts/gen_api_doc_pages.py
+      - docs/.scripts/gen_info_pages.py
 
 - literate-nav:
     nav_file: SUMMARY.md

@@ -44,7 +44,7 @@ cover/*
 MANIFEST
 
 # Per-project virtualenvs
-.venv*/
+.venv/
 pip-wheel-metadata/
 .python-version
 src/kiara_plugin/core_types/version.txt

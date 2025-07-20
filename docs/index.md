@@ -1,6 +1,6 @@
 # [**kiara**](https://dharpa.org/kiara.documentation) plugin: core-types
 
-This package contains a set of commonly used/useful modules, pipelines, types and metadata schemas for [*Kiara*](https://github.com/DHARPA-project/kiara).
+This package contains a set of commonly used/useful modules, pipelines, types and metadata schemas for [*kiara*](https://github.com/DHARPA-project/kiara).
 
 ## Description
 

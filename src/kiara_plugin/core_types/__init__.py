@@ -33,32 +33,51 @@ KIARA_METADATA = {
     "tags": ["core_types"],
     "labels": {"package": "kiara_plugin.core_types"},
 }
+"""Kiara metadata for the `kiara_plugin.core_types` module."""
+
 
 find_modules: KiaraEntryPointItem = (
     find_kiara_modules_under,
     "kiara_plugin.core_types.modules",
 )
+"""Entry point to discover all `kiara` modules for this plugin."""
+
 find_model_classes: KiaraEntryPointItem = (
     find_kiara_model_classes_under,
     "kiara_plugin.core_types.models",
 )
+"""Entry point to discover all `kiara` model classes for this plugin."""
+
 find_data_types: KiaraEntryPointItem = (
     find_data_types_under,
     "kiara_plugin.core_types.data_types",
 )
+"""Entry point to discover all `kiara` data types for this plugin."""
 find_pipelines: KiaraEntryPointItem = (
     find_pipeline_base_path_for_module,
     "kiara_plugin.core_types.pipelines",
     KIARA_METADATA,
 )
+"""Entry point to discover all `kiara` pipelines for this plugin."""
+
 
 find_renderer_classes: KiaraEntryPointItem = (
     find_kiara_renderers_under,
     "kiara_plugin.core_types.renderers",
 )
+"""Entry point to discover all `kiara` renderers for this plugin."""
 
 
-def get_version():
+def get_version() -> str:
+    """Get the current version of the `kiara_plugin.core_types` module.
+
+    This tries to get the version from the current git commit or tag, if possible.
+
+    Returns:
+        str: The version string.
+
+    """
+
     from importlib.metadata import PackageNotFoundError, version
 
     try:
